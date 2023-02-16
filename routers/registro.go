@@ -26,7 +26,7 @@ func Registro(w http.ResponseWriter, r *http.Request){
 	}
 
 	_,encontrado,_ :=bd.UserCheck(t.Email)
-	if encontrado == true{
+	if encontrado{
 		http.Error(w, "Usuario ya registrado", 400)
 		return
 	}
@@ -37,7 +37,7 @@ func Registro(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	if status == false{
+	if !status{
 		http.Error(w, "No se logro isnertar el registro del usuario",400)
 		return
 	}
