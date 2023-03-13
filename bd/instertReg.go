@@ -9,7 +9,7 @@ import (
 )
 
 /*InsterReg es la parada final con la BD para insertar los datos del usuario*/
-func InsertReg (u models.User) (string, bool, error){
+func InsertReg (usuario models.User) (string, bool, error){
 
 	contexto, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
@@ -18,9 +18,9 @@ func InsertReg (u models.User) (string, bool, error){
 	db:= MongoCN.Database("Twitter")
 	col := db.Collection("users")
 
-	u.Password, _  = EncriptarPassword(u.Password)
+	usuario.Password, _  = EncriptarPassword(usuario.Password)
 
-	result, err := col.InsertOne(contexto,u)
+	result, err := col.InsertOne(contexto,usuario)
 	if err != nil{
 		return "",false,err
 	}

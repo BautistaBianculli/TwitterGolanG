@@ -17,28 +17,28 @@ func Registro(w http.ResponseWriter, r *http.Request){
 	}
 
 	if len(t.Email) == 0{
-		http.Error(w, "Email vacio",400)
+		http.Error(w, "Email vacio\n",400)
 		return
 	}
 	if len(t.Password) <= 6{
-		http.Error(w, "La password es muy pobre",400)
+		http.Error(w, "La password es muy pobre\n",400)
 		return
 	}
 
 	_,encontrado,_ :=bd.UserCheck(t.Email)
-	if encontrado{
-		http.Error(w, "Usuario ya registrado", 400)
+	if encontrado == true{
+		http.Error(w, "Usuario ya registrado\n", 400)
 		return
 	}
 
 	_,status, err := bd.InsertReg(t)
 	if err != nil{
-		http.Error(w, "Ocurrio un error al registrar el usuario"+err.Error(),400)
+		http.Error(w, "Ocurrio un error al registrar el usuario \n"+err.Error(),400)
 		return
 	}
 
-	if !status{
-		http.Error(w, "No se logro isnertar el registro del usuario",400)
+	if status == false{
+		http.Error(w, "No se logro isnertar el registro del usuario\n",400)
 		return
 	}
 	
