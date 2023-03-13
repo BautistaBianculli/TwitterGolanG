@@ -3,7 +3,6 @@ package routers
 import (
 	"encoding/json"
 	"net/http"
-	"net/https"
 	"strconv"
 
 	"github.com/BautistaBianculli/TwitterGolanG/bd"

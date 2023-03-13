@@ -2,14 +2,15 @@ package handlers
 
 import (
 	"log"
-	"os"
 	"net/http"
+	"os"
+
+	"github.com/BautistaBianculli/TwitterGolanG/middleware"
+	"github.com/BautistaBianculli/TwitterGolanG/routers"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
-	"github.com/BautistaBianculli/TwitterGolanG/routers"
-	"github.com/BautistaBianculli/TwitterGolanG/middleware"
-
 )
+
 /*Manejadores setteo mi puerto y pongo a escuchar al SRV*/
 func Manejadores(){
 	router := mux.NewRouter()
@@ -34,6 +35,7 @@ func Manejadores(){
 
 
 	router.HandleFunc("/listaUsuarios",middleware.ChequeoBD(middleware.ValidoJWT(routers.ListaUsuarios))).Methods("GET")
+	router.HandleFunc("/leoTweetSeguidores",middleware.ChequeoBD(middleware.ValidoJWT(routers.LeoTweetsSeguidores))).Methods("GET")
 
 
 
